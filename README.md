@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# QuickTasks
 
-## Getting Started
+A small full-stack task tracker built with Next.js, React, and TypeScript, using Prisma, Zod, and TanStack Query.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Next.js (App Router) - frontend pages and backend API routes in one project
+- Prisma + SQLite - database ORM; SQLite needs no server setup, just a local file
+- Zod - validates incoming request data before it touches the database
+- TanStack Query - handles data fetching, caching, and loading/error states on the frontend
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Add a task with a title and priority (low/medium/high)
+- Mark a task as complete
+- Delete a task
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Getting started
 
-## Learn More
+Run: npm install
+Then: npx prisma migrate dev
+Then: npm run dev
+Open http://localhost:3000
 
-To learn more about Next.js, take a look at the following resources:
+## Project structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- prisma/schema.prisma - the Task data model
+- src/lib/validation.ts - Zod schema for validating new tasks
+- src/lib/prisma.ts - Prisma client setup
+- src/app/api/tasks/route.ts - GET (list tasks) and POST (create task) endpoints
+- src/app/api/tasks/[id]/route.ts - PATCH (toggle complete) and DELETE endpoints
+- src/app/page.tsx - main UI, using TanStack Query for data fetching
